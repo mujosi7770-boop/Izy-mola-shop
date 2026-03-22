@@ -5,63 +5,71 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Ezy-Mola | Hyper Mercado Digital</title>
     <style>
-        :root { --orange:#f39c12; --green:#27ae60; --dark:#1c2833; --gold:#d4af37; --blue:#3498db; --bg:#f4f7f6; }
-        * { box-sizing:border-box; -webkit-tap-highlight-color:transparent; font-family:'Segoe UI', Roboto, sans-serif; }
-        body { margin:0; background:var(--bg); padding-bottom:140px; color:#333; }
+        :root { 
+            --orange: #f39c12; --green: #27ae60; --dark: #1c2833; 
+            --gold: #d4af37; --blue: #3498db; --bg: #f4f7f6; 
+        }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; font-family: 'Segoe UI', Roboto, sans-serif; }
+        body { margin: 0; background: var(--bg); padding-bottom: 140px; color: #333; }
 
-        /* HEADER */
-        header { background:white; padding:15px; text-align:center; box-shadow:0 2px 10px rgba(0,0,0,0.1); position:sticky; top:0; z-index:1000; }
-        .brand { font-size:32px; font-weight:900; color:var(--orange); text-transform: lowercase; letter-spacing: -1px; }
-        .tagline { color:var(--green); font-size:11px; font-weight:bold; text-transform:uppercase; letter-spacing:1px; margin-top:5px; }
+        /* HEADER & BRANDING */
+        header { background: white; padding: 15px; text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
+        .brand { font-size: 28px; font-weight: 900; color: var(--dark); }
+        .brand span { background: var(--orange); color: white; padding: 2px 10px; border-radius: 8px; margin-right: 5px; }
+        .tagline { color: var(--green); font-size: 11px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; margin-top: 5px; }
 
-        /* NAV & SEARCH */
-        .nav-zone { background:white; padding:10px 15px; border-bottom:1px solid #eee; }
-        #search { width:100%; padding:14px 20px; border-radius:30px; border:2px solid #f0f0f0; outline:none; font-size:16px; background:#f9f9f9; }
+        /* NAV & LOCOMOTION (FILTROS) */
+        .nav-zone { background: white; padding: 10px 15px; border-bottom: 1px solid #eee; }
+        #search { width: 100%; padding: 14px 20px; border-radius: 30px; border: 2px solid #f0f0f0; outline: none; font-size: 16px; background: #f9f9f9; }
+        #search:focus { border-color: var(--orange); }
         
-        .cat-scroll { display:flex; overflow-x:auto; padding:15px 0 5px; gap:10px; scrollbar-width:none; }
-        .cat-scroll::-webkit-scrollbar { display:none; }
-        .cat-btn { background:white; border:1px solid #ddd; padding:8px 18px; border-radius:20px; white-space:nowrap; font-size:13px; font-weight:600; cursor:pointer; }
-        .cat-btn.active { background:var(--orange); color:white; border-color:var(--orange); }
+        .cat-scroll { display: flex; overflow-x: auto; padding: 15px 0 5px; gap: 10px; scrollbar-width: none; }
+        .cat-scroll::-webkit-scrollbar { display: none; }
+        .cat-btn { background: white; border: 1px solid #ddd; padding: 8px 18px; border-radius: 20px; white-space: nowrap; font-size: 13px; font-weight: 600; cursor: pointer; transition: 0.2s; }
+        .cat-btn.active { background: var(--orange); color: white; border-color: var(--orange); box-shadow: 0 4px 10px rgba(243,156,18,0.3); }
 
-        /* GRID PRODUITS */
-        .grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(160px,1fr)); gap:12px; padding:12px; }
-        .card { background:white; border-radius:15px; padding:12px; box-shadow:0 4px 12px rgba(0,0,0,0.05); display:flex; flex-direction:column; position:relative; }
+        /* GRID DE PRODUTOS (VIVANT) */
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; padding: 12px; }
+        .card { background: white; border-radius: 15px; padding: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); display: flex; flex-direction: column; position: relative; transition: 0.3s; }
+        .card:active { transform: scale(0.96); }
+        
+        .card img { width: 100%; height: 140px; object-fit: cover; border-radius: 12px; margin-bottom: 12px; background: #eee; }
+        .card h3 { font-size: 14px; margin: 0; color: var(--dark); height: 34px; overflow: hidden; line-height: 1.2; font-weight: 600; }
+        
+        /* BADGES ESTRATÉGICOS */
+        .badge-50 { position: absolute; top: 15px; left: 15px; background: var(--green); color: white; font-size: 9px; padding: 3px 8px; border-radius: 5px; font-weight: 800; z-index: 10; }
+        .tag-type { position: absolute; top: 15px; right: 15px; color: white; font-size: 9px; padding: 3px 8px; border-radius: 5px; font-weight: 800; z-index: 10; text-transform: uppercase; }
+        .tag-premium { background: var(--gold); }
+        .tag-economy { background: var(--blue); }
 
-        .card img { width:100%; height:130px; object-fill:cover; border-radius:12px; margin-bottom:10px; background:#f0f0f0; }
-        .card h3 { font-size:14px; margin:0; color:var(--dark); height:34px; overflow:hidden; }
+        .price-row { margin-top: auto; padding-top: 12px; }
+        .price { color: var(--green); font-weight: 800; font-size: 19px; display: block; margin-bottom: 10px; }
+        .btn-add { background: var(--dark); color: white; border: none; width: 100%; padding: 10px; border-radius: 8px; font-weight: bold; font-size: 13px; cursor: pointer; }
 
-        .badge-50 { position:absolute; top:15px; left:15px; background:var(--green); color:white; font-size:9px; padding:3px 8px; border-radius:5px; font-weight:800; }
-        .tag-type { position:absolute; top:15px; right:15px; color:white; font-size:9px; padding:3px 8px; border-radius:5px; font-weight:800; text-transform:uppercase; }
-        .tag-premium { background:var(--gold); }
-        .tag-economy { background:var(--blue); }
-
-        .price-row { margin-top:auto; padding-top:10px; }
-        .price { color:var(--green); font-weight:800; font-size:18px; display:block; margin-bottom:8px; }
-        .btn-add { background:var(--dark); color:white; border:none; width:100%; padding:10px; border-radius:8px; font-weight:bold; cursor:pointer; }
-
-        /* DOCK CHECKOUT */
-        #dock { position:fixed; bottom:0; left:0; right:0; background:white; z-index:2000; box-shadow:0 -5px 20px rgba(0,0,0,0.15); border-top:4px solid var(--orange); display:none; flex-direction:column; }
-        .form-area { padding:15px; background:#fafafa; border-bottom:1px solid #eee; }
-        .form-area input { width:100%; padding:12px; margin-bottom:8px; border:1px solid #ddd; border-radius:8px; }
-
-        .action-area { padding:15px 20px; display:flex; justify-content:space-between; align-items:center; }
-        .total-val { font-size:24px; font-weight:900; color:var(--green); }
-        .pay-btn { background:var(--orange); color:white; border:none; padding:14px 25px; border-radius:30px; font-weight:800; cursor:pointer; }
+        /* CHECKOUT DOCK (FORMULÁRIO DO BOSS) */
+        #dock { position: fixed; bottom: 0; left: 0; right: 0; background: white; z-index: 2000; box-shadow: 0 -5px 20px rgba(0,0,0,0.15); border-top: 4px solid var(--orange); display: none; flex-direction: column; }
+        .form-area { padding: 15px; background: #fafafa; border-bottom: 1px solid #eee; }
+        .form-area h4 { margin: 0 0 10px 0; color: var(--orange); font-size: 14px; text-transform: uppercase; letter-spacing: 1px; }
+        .form-area input { width: 100%; padding: 12px; margin-bottom: 8px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; outline: none; }
+        .form-area input:focus { border-color: var(--orange); }
+        
+        .action-area { padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; }
+        .total-box { line-height: 1.1; }
+        .total-val { font-size: 24px; font-weight: 900; color: var(--green); }
+        .pay-btn { background: var(--orange); color: white; border: none; padding: 14px 25px; border-radius: 30px; font-weight: 800; font-size: 15px; box-shadow: 0 5px 15px rgba(243,156,18,0.4); }
     </style>
 </head>
 <body>
 
 <header>
-    <div class="brand">ezy-mola</div>
-    <div class="tagline">Super Mercado Digital</div>
+    <div class="brand"><span>e-</span>Mola</div>
+    <div class="tagline">Ezy-Mola Super Mercado Digital</div>
 </header>
 
 <div class="nav-zone">
-    <input type="text" id="search" placeholder="O que você procura?" onkeyup="filterProducts()">
+    <input type="text" id="search" placeholder="O que você procura hoje?" onkeyup="runSearch()">
     <div class="cat-scroll" id="catTray">
-        <button class="cat-btn active" onclick="filterCat('all')">Todos</button>
-        <button class="cat-btn" onclick="filterCat('solar')">Energia Solar</button>
-        <button class="cat-btn" onclick="filterCat('tech')">Tech</button>
+        <button class="cat-btn active" onclick="setCat('all')">Todos Produtos</button>
     </div>
 </div>
 
@@ -69,81 +77,130 @@
 
 <div id="dock">
     <div class="form-area">
+        <h4>📍 Entrega em Maputo/Matola</h4>
         <input type="text" id="custName" placeholder="Seu Nome Completo">
         <input type="tel" id="custPhone" placeholder="Telemóvel (e-Mola)">
+        <input type="text" id="custAddr" placeholder="Bairro / Endereço Completo">
     </div>
     <div class="action-area">
         <div class="total-box">
-            <small>SINAL 50%:</small><br>
+            <small style="font-weight: bold; color: #888;">SINAL 50%:</small><br>
             <span class="total-val" id="displaySinal">0</span> <small>MT</small>
         </div>
-        <button class="pay-btn" onclick="executeOrder()">CONFIRMAR VIA WHATSAPP</button>
+        <button class="pay-btn" onclick="executeOrder()">CONFIRMAR VIA E-MOLA</button>
     </div>
 </div>
 
 <script>
+// --- CONFIGURAÇÃO DO IMPÉRIO ---
+const AGENTE_ID = "300032";
 const WHATSAPP_NUM = "258856113036";
-const products = [
-    { id:1, name:"Painel Solar 150W Kit", price:5500, cat:"solar", type:"premium", img:"https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?w=200" },
-    { id:2, name:"Coluna Bluetooth Bass", price:1200, cat:"tech", type:"economy", img:"https://images.unsplash.com/photo-1608156639585-34a0a56ee6c9?w=200" },
-    { id:3, name:"Smartphone X Pro", price:9800, cat:"tech", type:"premium", img:"https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=200" }
+let cart = [];
+let totalGlobal = 0;
+
+// --- DATABASE ESTRATÉGICA (PREMIUM & ECONOMY) ---
+const categories = [
+    { id: 'solar', n: 'Energia Solar' },
+    { id: 'tech', n: 'Smartphones & Som' },
+    { id: 'clima', n: 'Clima & Frio' },
+    { id: 'cozinha', n: 'Cozinha & Padaria' },
+    { id: 'casa', n: 'Móveis & Decor' },
+    { id: 'saude', n: 'Saúde & Beleza' }
 ];
 
-let cart = [];
+const products = [
+    { n: "Painel Solar Jinko 550W Mono Pro", c: "solar", p: 14500, t: "PREMIUM" },
+    { n: "Kit Lâmpada Solar + USB Económico", c: "solar", p: 2400, t: "ECONOMY" },
+    { n: "iPhone 15 Pro Max 256GB Gold", c: "tech", p: 89000, t: "PREMIUM" },
+    { n: "Smartphone Tecno Spark 20 Pro", c: "tech", p: 12500, t: "ECONOMY" },
+    { n: "Ar Condicionado Split 12000BTU Inverter", c: "clima", p: 25500, t: "PREMIUM" },
+    { n: "Ventoinha de Pé Industrial 18'", c: "clima", p: 1950, t: "ECONOMY" },
+    { n: "Air Fryer XL Digital 7.5L Gold", c: "cozinha", p: 8500, t: "PREMIUM" },
+    { n: "Fogão Elétrico 2 Bocas Simples", c: "cozinha", p: 1350, t: "ECONOMY" },
+    { n: "Sofá Moderno Luxo 3 Lugares", c: "casa", p: 32000, t: "PREMIUM" },
+    { n: "Tapete de Sala Shaggy 2x3m", c: "casa", p: 4800, t: "ECONOMY" }
+];
 
-function renderProducts(filter = 'all', query = '') {
-    const grid = document.getElementById('mainGrid');
-    grid.innerHTML = '';
-    
-    products.forEach(p => {
-        if((filter === 'all' || p.cat === filter) && p.name.toLowerCase().includes(query.toLowerCase())) {
-            grid.innerHTML += `
-                <div class="card">
-                    <span class="badge-50">SINAL 50%</span>
-                    <span class="tag-type tag-${p.type}">${p.type}</span>
-                    <img src="${p.img}" alt="${p.name}">
-                    <h3>${p.name}</h3>
-                    <div class="price-row">
-                        <span class="price">${p.price} MT</span>
-                        <button class="btn-add" onclick="addToCart(${p.id})">ADICIONAR</button>
-                    </div>
-                </div>
-            `;
-        }
-    });
+// Gerar produtos automáticos para preencher a loja (150 itens)
+for(let i=0; i<150; i++) {
+    const base = products[i % products.length];
+    products.push({ ...base, n: base.n + " (Mod." + (i+1) + ")", p: base.p + (Math.random()*100) });
 }
 
-function addToCart(id) {
-    const p = products.find(item => item.id === id);
-    cart.push(p);
-    const totalSinal = cart.reduce((sum, item) => sum + (item.price * 0.5), 0);
-    document.getElementById('displaySinal').innerText = totalSinal;
+// --- MOTEUR DE RENDU ---
+function render(list) {
+    const grid = document.getElementById('mainGrid');
+    // Utilisation de picsum.photos avec l'index pour garantir des images différentes et stables
+    grid.innerHTML = list.map((p, idx) => `
+        <div class="card">
+            <span class="badge-50">SINAL 50%</span>
+            <span class="tag-type ${p.t === 'PREMIUM' ? 'tag-premium' : 'tag-economy'}">${p.t}</span>
+            <img src="https://picsum.photos/seed/${p.n}/200/140" alt="${p.n}">
+            <h3>${p.n}</h3>
+            <div class="price-row">
+                <span class="price">${p.p.toLocaleString()} MT</span>
+                <button class="btn-add" onclick="addToCart('${p.n}', ${p.p})">ADICIONAR</button>
+            </div>
+        </div>
+    `).join('');
+}
+
+// --- LOGIQUE COMMERCIALE ---
+function addToCart(name, price) {
+    totalGlobal += price;
+    cart.push(name);
+    document.getElementById('displaySinal').innerText = (totalGlobal / 2).toLocaleString();
     document.getElementById('dock').style.display = 'flex';
 }
 
-function filterCat(cat) {
-    document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
-    event.target.classList.add('active');
-    renderProducts(cat);
-}
-
-function filterProducts() {
-    const q = document.getElementById('search').value;
-    renderProducts('all', q);
-}
-
 function executeOrder() {
-    const name = document.getElementById('custName').value;
-    const phone = document.getElementById('custPhone').value;
-    if(!name || !phone) return alert("Preencha seus dados!");
+    const n = document.getElementById('custName').value;
+    const f = document.getElementById('custPhone').value;
+    const a = document.getElementById('custAddr').value;
+
+    if (!n || !f || !a) return alert("Por favor, preencha todos os dados de entrega.");
+
+    const sinal = totalGlobal / 2;
+    const ussd = `*898*4*1*${AGENTE_ID}*${sinal}#`;
+
+    alert(`⚡ EZY-MOLA CHECKOUT\n\nProcessando pagamento ao Agente ${AGENTE_ID}...\nValor do Sinal: ${sinal.toLocaleString()} MT\n\nClique em OK para confirmar no seu telefone.`);
     
-    const total = document.getElementById('displaySinal').innerText;
-    const msg = `Olá Ezy-Mola! Meu nome é ${name}. Gostaria de encomendar itens. Sinal de 50%: ${total}MT.`;
-    window.open(`https://wa.me/${WHATSAPP_NUM}?text=${encodeURIComponent(msg)}`);
+    window.location.href = "tel:" + ussd.replace('#', '%23');
+
+    setTimeout(() => {
+        const msg = `*EZY-MOLA - NOVO PEDIDO*\n\n` +
+                    `👤 *Cliente:* ${n}\n` +
+                    `📞 *Contacto:* ${f}\n` +
+                    `📍 *Endereço:* ${a}\n\n` +
+                    `📦 *Itens:* ${cart.join(', ')}\n` +
+                    `💰 *Total:* ${totalGlobal.toLocaleString()} MT\n` +
+                    `✅ *Sinal 50% enviado:* ${sinal.toLocaleString()} MT ao Agente ${AGENTE_ID}`;
+        window.location.href = `https://wa.me/${WHATSAPP_NUM}?text=${encodeURIComponent(msg)}`;
+    }, 5000);
 }
 
-renderProducts();
-</script>
+// --- FILTRES & RECHERCHE ---
+function setCat(id) {
+    document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+    // Gestion de l'événement cross-browser
+    if(event) event.target.classList.add('active');
+    render(id === 'all' ? products : products.filter(p => p.c === id));
+}
 
+function runSearch() {
+    const q = document.getElementById('search').value.toLowerCase();
+    render(products.filter(p => p.n.toLowerCase().includes(q)));
+}
+
+// Iniciar Rayons
+const tray = document.getElementById('catTray');
+categories.forEach(c => {
+    tray.innerHTML += `<button class="cat-btn" onclick="setCat('${c.id}')">${c.n}</button>`;
+});
+
+render(products);
+</script>
 </body>
-  </html>
+</html>
+
+    
